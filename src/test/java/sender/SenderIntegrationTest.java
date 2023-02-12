@@ -88,6 +88,22 @@ public class SenderIntegrationTest {
         assertEquals(1, receivedPlayers.size());
     }
 
+    @Test
+    public void shouldCorrectlyHandleMultipleDestinations() {
+        // given
+        TestingRetriever retriever = new TestingRetriever();
+        TestingDestination destination1 = new TestingDestination(new TargetFilter(90.0));
+        TestingDestination destination2 = new TestingDestination(new TargetFilter(96.0));
+        Sender sender = new Sender(retriever, List.of(destination1, destination2));
+
+        // when
+        sender.send();
+
+        // then
+        assertEquals(2, destination1.receivedPlayers.size());
+        assertEquals(0, destination2.receivedPlayers.size());
+    }
+
     private class TestingRetriever implements Retriever {
 
         @Override
