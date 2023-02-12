@@ -10,8 +10,7 @@ public class App {
     public static void main(String[] args) {
         new Sender(
                 new DummyRetriever(),
-                new TargetFilter(99.6),
-                List.of(new DummyDestination(), new DummyDestination())
+                List.of(new DummyDestination(new TargetFilter(99.6)), new DummyDestination(new TargetFilter(99.5)))
         ).send();
     }
 }
