@@ -1,5 +1,8 @@
 package common;
 
+import lombok.ToString;
+
+@ToString
 public class Player {
 
     private String name;
