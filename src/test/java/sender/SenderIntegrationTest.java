@@ -17,7 +17,7 @@ public class SenderIntegrationTest {
         // given
         TestingRetriever retriever = new TestingRetriever();
         TestingDestination destination = new TestingDestination();
-        Sender sender = new Sender(retriever, new TargetFilter(89.9), destination);
+        Sender sender = new Sender(retriever, new TargetFilter(89.9), List.of(destination));
 
         // when
         sender.send();
@@ -32,7 +32,7 @@ public class SenderIntegrationTest {
         // given
         TestingRetriever retriever = new TestingRetriever();
         TestingDestination destination = new TestingDestination();
-        Sender sender = new Sender(retriever, new TargetFilter(92.5), destination);
+        Sender sender = new Sender(retriever, new TargetFilter(92.5), List.of(destination));
 
         // when
         sender.send();
@@ -47,7 +47,7 @@ public class SenderIntegrationTest {
         // given
         TestingRetriever retriever = new TestingRetriever();
         TestingDestination destination = new TestingDestination();
-        Sender sender = new Sender(retriever, new TargetFilter(95.1), destination);
+        Sender sender = new Sender(retriever, new TargetFilter(95.1), List.of(destination));
 
         // when
         sender.send();
@@ -62,7 +62,7 @@ public class SenderIntegrationTest {
         // given
         TestingRetriever retriever = new TestingRetriever();
         TestingDestination destination = new TestingDestination();
-        Sender sender = new Sender(retriever, new TargetFilter(90.0), destination);
+        Sender sender = new Sender(retriever, new TargetFilter(90.0), List.of(destination));
 
         // when
         sender.send();
@@ -77,7 +77,7 @@ public class SenderIntegrationTest {
         // given
         TestingRetriever retriever = new TestingRetriever();
         TestingDestination destination = new TestingDestination();
-        Sender sender = new Sender(retriever, new TargetFilter(95.0), destination);
+        Sender sender = new Sender(retriever, new TargetFilter(95.0), List.of(destination));
 
         // when
         sender.send();

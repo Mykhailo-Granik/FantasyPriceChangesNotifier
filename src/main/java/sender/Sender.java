@@ -14,10 +14,10 @@ public class Sender {
 
     private final Retriever retriever;
     private final PlayerFilter playerFilter;
-    private final Destination destination;
+    private final List<Destination> destinations;
 
     public void send() {
-        destination.send(playersMatchingFilter());
+        destinations.forEach(d -> d.send(playersMatchingFilter()));
     }
 
     private List<Player> playersMatchingFilter() {
