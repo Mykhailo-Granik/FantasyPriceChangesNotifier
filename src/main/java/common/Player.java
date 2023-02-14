@@ -1,6 +1,7 @@
 package common;
 
 import lombok.ToString;
+import util.DoubleWithOnePlace;
 
 @ToString
 public class Player {
@@ -8,8 +9,8 @@ public class Player {
     private String name;
     private String club;
     private String position;
-    private int price;
-    private int target;
+    private DoubleWithOnePlace price;
+    private DoubleWithOnePlace target;
 
     public Player() {
 
@@ -19,17 +20,17 @@ public class Player {
         this.name = name;
         this.club = club;
         this.position = position;
-        this.price = (int) Math.round(price * 10);
-        this.target = (int) Math.round(target * 10);
+        this.price = new DoubleWithOnePlace(price);
+        this.target = new DoubleWithOnePlace(target);
     }
 
-    public double getTarget() {
-        return target / 10.0;
+    public DoubleWithOnePlace getTarget() {
+        return target;
     }
 
     public static Player createPlayerWithTarget(double target) {
         Player player = new Player();
-        player.target = (int) Math.round(target * 10);
+        player.target = new DoubleWithOnePlace(target);
         return player;
     }
 
