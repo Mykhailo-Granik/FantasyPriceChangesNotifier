@@ -1,5 +1,5 @@
 import destination.DummyDestination;
-import filter.TargetFilter;
+import filter.PlayersCloseToPriceRiseFilter;
 import retriever.DummyRetriever;
 import sender.Sender;
 
@@ -10,7 +10,7 @@ public class App {
     public static void main(String[] args) {
         new Sender(
                 new DummyRetriever(),
-                List.of(new DummyDestination(new TargetFilter(99.6)), new DummyDestination(new TargetFilter(99.5)))
+                List.of(new DummyDestination(new PlayersCloseToPriceRiseFilter(99.6)), new DummyDestination(new PlayersCloseToPriceRiseFilter(99.5)))
         ).send();
     }
 }

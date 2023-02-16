@@ -3,7 +3,7 @@ package sender;
 import common.Player;
 import destination.AbstractDestination;
 import filter.PlayerFilter;
-import filter.TargetFilter;
+import filter.PlayersCloseToPriceRiseFilter;
 import org.junit.jupiter.api.Test;
 import retriever.Retriever;
 
@@ -17,7 +17,7 @@ public class SenderIntegrationTest {
     public void shouldSendAllPlayersWhenTargetIsLowerThanThreshold() {
         // given
         TestingRetriever retriever = new TestingRetriever();
-        TestingDestination destination = new TestingDestination(new TargetFilter(89.9));
+        TestingDestination destination = new TestingDestination(new PlayersCloseToPriceRiseFilter(89.9));
         Sender sender = new Sender(retriever, List.of(destination));
 
         // when
@@ -32,7 +32,7 @@ public class SenderIntegrationTest {
     public void shouldSendOnePlayerWhenTargetIsInTheMiddle() {
         // given
         TestingRetriever retriever = new TestingRetriever();
-        TestingDestination destination = new TestingDestination(new TargetFilter(92.5));
+        TestingDestination destination = new TestingDestination(new PlayersCloseToPriceRiseFilter(92.5));
         Sender sender = new Sender(retriever, List.of(destination));
 
         // when
@@ -47,7 +47,7 @@ public class SenderIntegrationTest {
     public void shouldReturnNoPlayersWhenTargetIsHigh() {
         // given
         TestingRetriever retriever = new TestingRetriever();
-        TestingDestination destination = new TestingDestination(new TargetFilter(95.1));
+        TestingDestination destination = new TestingDestination(new PlayersCloseToPriceRiseFilter(95.1));
         Sender sender = new Sender(retriever, List.of(destination));
 
         // when
@@ -62,7 +62,7 @@ public class SenderIntegrationTest {
     public void shouldSendAllPlayersWhenThresholdEqualsToLowerTarget() {
         // given
         TestingRetriever retriever = new TestingRetriever();
-        TestingDestination destination = new TestingDestination(new TargetFilter(90.0));
+        TestingDestination destination = new TestingDestination(new PlayersCloseToPriceRiseFilter(90.0));
         Sender sender = new Sender(retriever, List.of(destination));
 
         // when
@@ -77,7 +77,7 @@ public class SenderIntegrationTest {
     public void shouldSendOnePlayerWhenThresholdEqualsToHigherTarget() {
         // given
         TestingRetriever retriever = new TestingRetriever();
-        TestingDestination destination = new TestingDestination(new TargetFilter(95.0));
+        TestingDestination destination = new TestingDestination(new PlayersCloseToPriceRiseFilter(95.0));
         Sender sender = new Sender(retriever, List.of(destination));
 
         // when
@@ -92,8 +92,8 @@ public class SenderIntegrationTest {
     public void shouldCorrectlyHandleMultipleDestinations() {
         // given
         TestingRetriever retriever = new TestingRetriever();
-        TestingDestination destination1 = new TestingDestination(new TargetFilter(90.0));
-        TestingDestination destination2 = new TestingDestination(new TargetFilter(96.0));
+        TestingDestination destination1 = new TestingDestination(new PlayersCloseToPriceRiseFilter(90.0));
+        TestingDestination destination2 = new TestingDestination(new PlayersCloseToPriceRiseFilter(96.0));
         Sender sender = new Sender(retriever, List.of(destination1, destination2));
 
         // when
@@ -104,7 +104,7 @@ public class SenderIntegrationTest {
         assertEquals(0, destination2.receivedPlayers.size());
     }
 
-    private class TestingRetriever implements Retriever {
+    private static class TestingRetriever implements Retriever {
 
         @Override
         public List<Player> retrieve() {
@@ -115,7 +115,7 @@ public class SenderIntegrationTest {
         }
     }
 
-    private class TestingDestination extends AbstractDestination {
+    private static class TestingDestination extends AbstractDestination {
 
         private List<Player> receivedPlayers;
 

@@ -1,14 +1,13 @@
 package filter;
 
 import common.Player;
-import lombok.RequiredArgsConstructor;
 import util.DoubleWithOnePlace;
 
-public class TargetFilter implements PlayerFilter {
+public class PlayersCloseToPriceRiseFilter implements PlayerFilter {
 
     private final DoubleWithOnePlace threshold;
 
-    public TargetFilter(double threshold) {
+    public PlayersCloseToPriceRiseFilter(double threshold) {
         this.threshold = new DoubleWithOnePlace(threshold);
     }
 
