@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import retriever.Retriever;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -21,6 +22,7 @@ public class FantasyFootballHubRetriever implements Retriever {
         try {
             return getFantasyFootballHubPlayers().stream()
                     .map(FantasyFootballHubPlayer::toPlayer)
+                    .filter(Objects::nonNull)
                     .collect(Collectors.toList());
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);

@@ -67,4 +67,24 @@ public class FantasyFootballHubPlayerTest {
         assertEquals(player, fantasyFootballHubPlayer.toPlayer());
     }
 
+    @Test
+    public void shouldReturnNullWhenThereIsNoData() {
+        FantasyFootballHubPlayer fantasyFootballHubPlayer = new FantasyFootballHubPlayer(
+                NAME,
+                new FantasyFootballHubPlayer.Team(CLUB),
+                null
+        );
+        assertNull(fantasyFootballHubPlayer.toPlayer());
+    }
+
+    @Test
+    public void shouldReturnNullWhenThereIsNoPriceInfo() {
+        FantasyFootballHubPlayer fantasyFootballHubPlayer = new FantasyFootballHubPlayer(
+                NAME,
+                new FantasyFootballHubPlayer.Team(CLUB),
+                new FantasyFootballHubPlayer.Data(4, null)
+        );
+        assertNull(fantasyFootballHubPlayer.toPlayer());
+    }
+
 }

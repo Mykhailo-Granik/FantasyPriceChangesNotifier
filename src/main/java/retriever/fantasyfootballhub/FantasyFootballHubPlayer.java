@@ -48,13 +48,18 @@ public class FantasyFootballHubPlayer {
     }
 
     public Player toPlayer() {
-        return new Player(
-                webName,
-                team.getName(),
-                fromId(data.getPositionId()),
-                data.getPriceInfo().getValue(),
-                data.getPriceInfo().getTarget()
-        );
+        try {
+            return new Player(
+                    webName,
+                    team.getName(),
+                    fromId(data.getPositionId()),
+                    data.getPriceInfo().getValue(),
+                    data.getPriceInfo().getTarget()
+            );
+        } catch (Exception e) {
+            System.out.println("Failed to convert player: " + this);
+            return null;
+        }
     }
 
     private Position fromId(int id) {
