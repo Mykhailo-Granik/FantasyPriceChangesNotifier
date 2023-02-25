@@ -1,12 +1,17 @@
 package retriever.fantasyfootballhub;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import common.Player;
 import common.Position;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FantasyFootballHubPlayer {
 
     private String webName;
@@ -16,12 +21,16 @@ public class FantasyFootballHubPlayer {
 
     @lombok.Data
     @AllArgsConstructor
+    @NoArgsConstructor
+    @JsonIgnoreProperties(ignoreUnknown = true)
     static class Team {
         private String name;
     }
 
     @lombok.Data
     @AllArgsConstructor
+    @NoArgsConstructor
+    @JsonIgnoreProperties(ignoreUnknown = true)
     static class Data {
         private int positionId;
         private PriceInfo priceInfo;
@@ -29,9 +38,13 @@ public class FantasyFootballHubPlayer {
 
     @lombok.Data
     @AllArgsConstructor
+    @NoArgsConstructor
+    @JsonIgnoreProperties(ignoreUnknown = true)
     static class PriceInfo {
-        private double Value;
-        private double Target;
+        @JsonProperty("Value")
+        private double value;
+        @JsonProperty("Target")
+        private double target;
     }
 
     public Player toPlayer() {
