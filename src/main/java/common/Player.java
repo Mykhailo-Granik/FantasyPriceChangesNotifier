@@ -1,16 +1,18 @@
 package common;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import util.DoubleWithOnePlace;
 
 @ToString
 @Getter
+@EqualsAndHashCode
 public class Player {
 
     private String name;
     private String club;
-    private String position;
+    private Position position;
     private DoubleWithOnePlace price;
     private DoubleWithOnePlace target;
 
@@ -23,7 +25,7 @@ public class Player {
         this.club = club;
     }
 
-    public Player(String name, String club, String position, double price, double target) {
+    public Player(String name, String club, Position position, double price, double target) {
         this.name = name;
         this.club = club;
         this.position = position;

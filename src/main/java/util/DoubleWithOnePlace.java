@@ -1,5 +1,8 @@
 package util;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 public class DoubleWithOnePlace implements Comparable<DoubleWithOnePlace> {
 
     private final int valueTimesTen;

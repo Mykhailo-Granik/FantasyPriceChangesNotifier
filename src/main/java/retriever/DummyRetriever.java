@@ -1,6 +1,7 @@
 package retriever;
 
 import common.Player;
+import common.Position;
 
 import java.util.List;
 
@@ -8,19 +9,10 @@ public class DummyRetriever implements Retriever{
     @Override
     public List<Player> retrieve() {
         return List.of(
-                new Player("Lionel Messi", "Barcelona", "Forward", 10.8, 91.5),
-                new Player("Cristiano Ronaldo", "Juventus", "Forward", 9.5, 92.5),
-                new Player("Neymar", "Paris Saint-Germain", "Forward", 10.2, 93.0),
-                new Player("Kylian Mbappe", "Paris Saint-Germain", "Forward", 9.8, 94.5),
-                new Player("Mohamed Salah", "Liverpool", "Forward", 9.0, 92.5),
-                new Player("Sadio Mane", "Liverpool", "Forward", 8.5, 96.0),
-                new Player("Kevin De Bruyne", "Manchester City", "Midfielder", 9.0, 99.5),
-                new Player("Eden Hazard", "Real Madrid", "Midfielder", 9.0, 93.5),
-                new Player("Luka Modric", "Real Madrid", "Midfielder", 8.5, 93.0),
-                new Player("Sergio Ramos", "Real Madrid", "Defender", 8.0, 98.5),
-                new Player("Virgil van Dijk", "Liverpool", "Defender", 8.0, 98.5),
-                new Player("Alisson", "Liverpool", "Goalkeeper", 8.0, 98.5),
-                new Player("Jan Oblak", "Atletico Madrid", "Goalkeeper", 7.5, 100.0)
+                new Player("Player 1", "Club 1", Position.GK, 1.0, 1.0),
+                new Player("Player 2", "Club 2", Position.DEF, 2.0, 2.0),
+                new Player("Player 3", "Club 3", Position.MID, 3.0, 3.0),
+                new Player("Player 4", "Club 4", Position.FWD, 4.0, 4.0)
         );
     }
 }
