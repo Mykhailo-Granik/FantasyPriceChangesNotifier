@@ -55,5 +55,23 @@ public class DoubleWithOnePlaceTest {
         assertTrue(a.compareTo(b) > 0);
     }
 
+    @Test
+    public void shouldCorrectlyConvertToStringPositiveNumber() {
+        DoubleWithOnePlace a = new DoubleWithOnePlace(95.3);
+        assertEquals("95.3", a.toString());
+    }
+
+    @Test
+    public void shouldCorrectlyConvertToStringNegativeNumber() {
+        DoubleWithOnePlace a = new DoubleWithOnePlace(-97.4);
+        assertEquals("-97.4", a.toString());
+    }
+
+    @Test
+    public void shouldCorrectlyConvertToStringZero() {
+        DoubleWithOnePlace a = new DoubleWithOnePlace(0.0);
+        assertEquals("0.0", a.toString());
+    }
+
 
 }

@@ -4,7 +4,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @EqualsAndHashCode
-@ToString
 public class DoubleWithOnePlace implements Comparable<DoubleWithOnePlace> {
 
     private final int valueTimesTen;
@@ -16,5 +15,10 @@ public class DoubleWithOnePlace implements Comparable<DoubleWithOnePlace> {
     @Override
     public int compareTo(DoubleWithOnePlace o) {
         return Integer.compare(valueTimesTen, o.valueTimesTen);
+    }
+
+    @Override
+    public String toString() {
+        return valueTimesTen / 10 + "." + Math.abs(valueTimesTen) % 10;
     }
 }
