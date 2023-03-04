@@ -57,7 +57,6 @@ public class FantasyFootballHubPlayer {
                     data.getPriceInfo().getTarget()
             );
         } catch (Exception e) {
-            System.out.println("Failed to convert player: " + this);
             return null;
         }
     }
