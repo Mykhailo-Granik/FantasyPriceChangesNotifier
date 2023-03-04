@@ -2,10 +2,8 @@ package common;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.ToString;
 import util.DoubleWithOnePlace;
 
-@ToString
 @Getter
 @EqualsAndHashCode
 public class Player {
@@ -39,4 +37,8 @@ public class Player {
         return player;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s(%s), price=%s, target=%s", name, club, price, target);
+    }
 }
