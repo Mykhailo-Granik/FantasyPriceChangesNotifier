@@ -1,29 +1,20 @@
 package destination.telegram;
 
 import common.Player;
-import destination.AbstractDestination;
-import filter.PlayerFilter;
+import destination.Destination;
+import lombok.RequiredArgsConstructor;
+import message.Message;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class TelegramDestination extends AbstractDestination {
+@RequiredArgsConstructor
+public class TelegramDestination implements Destination {
 
+    private final Message message;
     private final TelegramClient telegramClient;
 
-    public TelegramDestination(PlayerFilter playerFilter, TelegramClient telegramClient) {
-        super(playerFilter);
-        this.telegramClient = telegramClient;
-    }
-
     @Override
-    protected void sendFilteredPlayers(List<Player> players) {
-        telegramClient.sendMessage(message(players));
-    }
-
-    private String message(List<Player> players) {
-        return players.stream()
-                .map(Player::toString)
-                .collect(Collectors.joining("\n"));
+    public void send(List<Player> players) {
+        telegramClient.sendMessage(message.createMessage(players));
     }
 }
