@@ -12,7 +12,12 @@ public class App {
     public static void main(String[] args) {
         new Sender(
                 new RetrieverFactory().create(),
-                List.of(new TelegramDestination(new PlayersCloseToPriceFallMessage(-95.0), new TelegramClientImpl(new DummyApplicationProperties())))
+                List.of(
+                        new TelegramDestination(
+                                List.of(new PlayersCloseToPriceFallMessage(-95.0)),
+                                new TelegramClientImpl(new DummyApplicationProperties())
+                        )
+                )
         ).send();
     }
 }
