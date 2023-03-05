@@ -39,6 +39,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return String.format("%s(%s), price=%s, target=%s", name, club, price, target);
+        return String.format("%s(%s), %s£, target=%s", name, club, price, target);
     }
 }
