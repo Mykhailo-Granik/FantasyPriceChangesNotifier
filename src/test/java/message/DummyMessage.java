@@ -3,10 +3,15 @@ package message;
 import common.Player;
 import filter.AllMatchFilter;
 import filter.PlayerFilter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class DummyMessage extends AbstractMessage {
+
+    private final String message;
+
     @Override
     protected PlayerFilter playerFilter() {
         return new AllMatchFilter();
@@ -14,6 +19,6 @@ public class DummyMessage extends AbstractMessage {
 
     @Override
     protected String messageForFilteredPlayers(List<Player> players) {
-        return "This is dummy message";
+        return message;
     }
 }
