@@ -30,7 +30,7 @@ public class PlayersCloseToPriceRiseMessageTest {
                 )
         );
         assertEquals(
-                "Players close to price rise: ⬆️⬆️⬆️\n" + player2 + "\n" + player3,
+                "Players close to price rise ⬆️⬆️⬆️\n" + player2 + "\n" + player3,
                 message
         );
     }

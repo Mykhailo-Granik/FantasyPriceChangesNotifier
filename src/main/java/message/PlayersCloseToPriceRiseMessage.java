@@ -25,7 +25,7 @@ public class PlayersCloseToPriceRiseMessage extends AbstractMessage {
         if (players.isEmpty()) {
             return "No players close to price rise";
         }
-        return "Players close to price rise: ⬆️⬆️⬆️\n" + players.stream()
+        return "Players close to price rise ⬆️⬆️⬆️\n" + players.stream()
                 .map(Player::toString)
                 .collect(Collectors.joining("\n"));
     }
