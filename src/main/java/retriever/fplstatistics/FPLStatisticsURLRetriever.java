@@ -16,14 +16,17 @@ public class FPLStatisticsURLRetriever {
     private final ApplicationProperties applicationProperties;
     private final List<String> requests = new ArrayList<>();
 
-    public List<String> allRequests() {
+    public String dataURL() {
         setChromeDriverPath();
         ChromeDriver driver = new ChromeDriver();
         DevTools devTools = createDevTools(driver);
         addRequestsListener(devTools);
         executeMainRequest(driver);
         closeDriver(driver);
-        return requests;
+        return requests.stream()
+                .filter(request -> request.contains("www.fplstatistics.co.uk/Home/AjaxPricesEHandler"))
+                .findFirst()
+                .orElseThrow();
     }
 
     private void setChromeDriverPath() {
