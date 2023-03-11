@@ -14,19 +14,40 @@ import java.util.Optional;
 public class FPLStatisticsURLRetriever {
 
     private final ApplicationProperties applicationProperties;
+    private final List<String> requests = new ArrayList<>();
 
     public List<String> allRequests() {
-        System.setProperty("webdriver.chrome.driver", applicationProperties.getString("webdriver.chrome.driver"));
+        setChromeDriverPath();
         ChromeDriver driver = new ChromeDriver();
+        DevTools devTools = createDevTools(driver);
+        addRequestsListener(devTools);
+        executeMainRequest(driver);
+        closeDriver(driver);
+        return requests;
+    }
+
+    private void setChromeDriverPath() {
+        System.setProperty("webdriver.chrome.driver", applicationProperties.getString("webdriver.chrome.driver"));
+    }
+
+    private DevTools createDevTools(ChromeDriver driver) {
         DevTools devTools = driver.getDevTools();
         devTools.createSession();
         devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
-        List<String> requests = new ArrayList<>();
+        return devTools;
+    }
+
+    private void addRequestsListener(DevTools devTools) {
         devTools.addListener(Network.requestWillBeSent(),
                 request -> requests.add(request.getRequest().getUrl()));
+    }
+
+    private void executeMainRequest(ChromeDriver driver) {
         driver.get("http://www.fplstatistics.co.uk/Home/IndexAndroid");
+    }
+
+    private void closeDriver(ChromeDriver driver) {
         driver.quit();
-        return requests;
     }
 
 }
