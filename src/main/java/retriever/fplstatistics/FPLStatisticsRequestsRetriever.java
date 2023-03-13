@@ -17,6 +17,7 @@ public class FPLStatisticsRequestsRetriever {
     private final List<String> requests = new ArrayList<>();
 
     public List<String> dataURL() {
+        requests.clear();
         setChromeDriverPath();
         ChromeDriver driver = new ChromeDriver();
         DevTools devTools = createDevTools(driver);

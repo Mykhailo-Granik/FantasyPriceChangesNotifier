@@ -13,7 +13,6 @@ public class FPLStatisticsRequestsRetrieverTest {
     public void shouldReturnRequestWithFPLPlayersData() throws IOException {
         FPLStatisticsRequestsRetriever underTest = new FPLStatisticsRequestsRetriever(new ApplicationPropertiesImpl());
         assertFalse(underTest.dataURL().isEmpty());
-//        assertTrue(url.contains("www.fplstatistics.co.uk/Home/AjaxPricesEHandler"));
     }
 
 }
