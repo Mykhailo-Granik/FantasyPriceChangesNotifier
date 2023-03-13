@@ -11,22 +11,19 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class FPLStatisticsURLRetriever {
+public class FPLStatisticsRequestsRetriever {
 
     private final ApplicationProperties applicationProperties;
     private final List<String> requests = new ArrayList<>();
 
-    public String dataURL() {
+    public List<String> dataURL() {
         setChromeDriverPath();
         ChromeDriver driver = new ChromeDriver();
         DevTools devTools = createDevTools(driver);
         addRequestsListener(devTools);
         executeMainRequest(driver);
         closeDriver(driver);
-        return requests.stream()
-                .filter(request -> request.contains("www.fplstatistics.co.uk/Home/AjaxPricesEHandler"))
-                .findFirst()
-                .orElseThrow();
+        return requests;
     }
 
     private void setChromeDriverPath() {
