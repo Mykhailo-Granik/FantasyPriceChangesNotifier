@@ -80,6 +80,12 @@ public class HttpGetRequestImplTest {
         assertThrows(RuntimeException.class, () -> underTest.send(URL));
     }
 
+    @Test
+    public void shouldThrowAnExceptionWhenHttpClientThrowsAnException() {
+        HttpGetRequest underTest = new HttpGetRequestImpl(new FailingHttpClient());
+        assertThrows(RuntimeException.class, () -> underTest.send(URL));
+    }
+
     @RequiredArgsConstructor
     private static class TestingHttpClient extends HttpClient {
 
@@ -193,4 +199,15 @@ public class HttpGetRequestImplTest {
         }
     }
 
+    private static class FailingHttpClient extends TestingHttpClient {
+
+        public FailingHttpClient() {
+            super(new TestingHttpResponse(HttpURLConnection.HTTP_OK, BODY));
+        }
+
+        @Override
+        public <T> HttpResponse<T> send(HttpRequest request, HttpResponse.BodyHandler<T> responseBodyHandler) {
+            throw new RuntimeException();
+        }
+    }
 }

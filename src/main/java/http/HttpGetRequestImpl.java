@@ -22,7 +22,7 @@ public class HttpGetRequestImpl implements HttpGetRequest {
         try {
             response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
-
+            throw new RuntimeException(e);
         }
         if (response.statusCode() >= 200 && response.statusCode() < 300) {
             return response.body();
