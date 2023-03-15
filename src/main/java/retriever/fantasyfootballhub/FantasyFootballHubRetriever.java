@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class FantasyFootballHubRetriever implements Retriever {
 
     private final DataSource dataSource;
-    private final FantasyFootballHubClient fantasyFootballHubClient;
 
     private final static ObjectMapper objectMapper = new ObjectMapper();
     @Override
@@ -33,7 +32,8 @@ public class FantasyFootballHubRetriever implements Retriever {
 
     private List<FantasyFootballHubPlayer> getFantasyFootballHubPlayers() throws JsonProcessingException {
         return objectMapper.readValue(
-                fantasyFootballHubClient.playerData(), new TypeReference<>() {}
+                dataSource.getData(), new TypeReference<>() {
+                }
         );
     }
 }

@@ -19,8 +19,7 @@ public class FantasyFootballHubRetrieverTest {
     @Test
     public void shouldRetrievePlayers() {
         FantasyFootballHubRetriever retriever = new FantasyFootballHubRetriever(
-                new TestingDataSource(PLAYER_DATA),
-                new TestingFantasyFootballHubClient(PLAYER_DATA)
+                new TestingDataSource(PLAYER_DATA)
         );
         assertEquals(
                 List.of(
@@ -34,21 +33,9 @@ public class FantasyFootballHubRetrieverTest {
     @Test
     public void shouldFIlterOutPlayersWithIncompleteData() {
         FantasyFootballHubRetriever retriever = new FantasyFootballHubRetriever(
-                new TestingDataSource(INCOMPLETE_PLAYER_DATA),
-                new TestingFantasyFootballHubClient(INCOMPLETE_PLAYER_DATA)
+                new TestingDataSource(INCOMPLETE_PLAYER_DATA)
         );
         assertEquals(Collections.emptyList(), retriever.retrieve());
-    }
-
-    @RequiredArgsConstructor
-    private static class TestingFantasyFootballHubClient extends FantasyFootballHubClient {
-
-        private final String playerData;
-
-        @Override
-        public String playerData() {
-            return playerData;
-        }
     }
 
     @RequiredArgsConstructor
