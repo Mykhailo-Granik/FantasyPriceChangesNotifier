@@ -4,6 +4,7 @@ import common.Player;
 import common.Position;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import retriever.datasource.DataSource;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +19,7 @@ public class FantasyFootballHubRetrieverTest {
     @Test
     public void shouldRetrievePlayers() {
         FantasyFootballHubRetriever retriever = new FantasyFootballHubRetriever(
+                new TestingDataSource(PLAYER_DATA),
                 new TestingFantasyFootballHubClient(PLAYER_DATA)
         );
         assertEquals(
@@ -32,6 +34,7 @@ public class FantasyFootballHubRetrieverTest {
     @Test
     public void shouldFIlterOutPlayersWithIncompleteData() {
         FantasyFootballHubRetriever retriever = new FantasyFootballHubRetriever(
+                new TestingDataSource(INCOMPLETE_PLAYER_DATA),
                 new TestingFantasyFootballHubClient(INCOMPLETE_PLAYER_DATA)
         );
         assertEquals(Collections.emptyList(), retriever.retrieve());
@@ -41,8 +44,19 @@ public class FantasyFootballHubRetrieverTest {
     private static class TestingFantasyFootballHubClient extends FantasyFootballHubClient {
 
         private final String playerData;
+
         @Override
         public String playerData() {
+            return playerData;
+        }
+    }
+
+    @RequiredArgsConstructor
+    private static class TestingDataSource implements DataSource {
+        private final String playerData;
+
+        @Override
+        public String getData() {
             return playerData;
         }
     }

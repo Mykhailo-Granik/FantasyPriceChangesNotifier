@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import common.Player;
 import lombok.RequiredArgsConstructor;
 import retriever.Retriever;
+import retriever.datasource.DataSource;
 
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class FantasyFootballHubRetriever implements Retriever {
 
+    private final DataSource dataSource;
     private final FantasyFootballHubClient fantasyFootballHubClient;
 
     private final static ObjectMapper objectMapper = new ObjectMapper();
