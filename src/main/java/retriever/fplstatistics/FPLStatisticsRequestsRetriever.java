@@ -2,6 +2,7 @@ package retriever.fplstatistics;
 
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v110.network.Network;
 import properties.ApplicationProperties;
@@ -19,7 +20,10 @@ public class FPLStatisticsRequestsRetriever {
     public List<String> dataURL() {
         requests.clear();
         setChromeDriverPath();
-        ChromeDriver driver = new ChromeDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--start-maximized");
+        chromeOptions.addArguments("--remote-allow-origins=*");
+        ChromeDriver driver = new ChromeDriver(chromeOptions);
         DevTools devTools = createDevTools(driver);
         addRequestsListener(devTools);
         executeMainRequest(driver);
