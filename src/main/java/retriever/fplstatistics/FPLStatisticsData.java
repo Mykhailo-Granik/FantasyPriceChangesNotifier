@@ -1,5 +1,6 @@
 package retriever.fplstatistics;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import common.Player;
 import common.Position;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FPLStatisticsData {
 
     @JsonProperty("aaData")
