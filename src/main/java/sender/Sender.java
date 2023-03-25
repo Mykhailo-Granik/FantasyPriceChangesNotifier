@@ -2,7 +2,6 @@ package sender;
 
 import common.Player;
 import destination.Destination;
-import filter.PlayerFilter;
 import lombok.RequiredArgsConstructor;
 import retriever.Retriever;
 
@@ -16,7 +15,7 @@ public class Sender {
 
     public void send() {
         List<Player> players = retriever.retrieve();
-        destinations.forEach(d -> d.send(players));
+        destinations.forEach(d -> d.send(players, null));
     }
 
 }

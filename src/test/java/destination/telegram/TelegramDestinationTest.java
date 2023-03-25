@@ -21,7 +21,7 @@ public class TelegramDestinationTest {
                 new Player("player1", "club1"),
                 new Player("player2", "club2")
         );
-        underTest.send(players);
+        underTest.send(players, null);
         assertEquals(message.createMessage(players), telegramClient.getMessages().get(0));
     }
 
@@ -34,7 +34,7 @@ public class TelegramDestinationTest {
                 new Player("player1", "club1"),
                 new Player("player2", "club2")
         );
-        underTest.send(players);
+        underTest.send(players, null);
         assertEquals(
                 List.of(message1.createMessage(players), message2.createMessage(players)),
                 telegramClient.getMessages()

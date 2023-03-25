@@ -61,7 +61,7 @@ public class SenderTest {
         private List<Player> receivedPlayers;
 
         @Override
-        public void send(List<Player> players) {
+        public void send(List<Player> players, List<String> messages) {
             this.receivedPlayers = players;
         }
     }

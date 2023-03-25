@@ -16,7 +16,7 @@ public class TelegramDestination implements Destination {
     private final TelegramClient telegramClient;
 
     @Override
-    public void send(List<Player> players) {
-        messages.forEach(m -> telegramClient.sendMessage(m.createMessage(players)));
+    public void send(List<Player> players, List<String> messages) {
+        this.messages.forEach(m -> telegramClient.sendMessage(m.createMessage(players)));
     }
 }
