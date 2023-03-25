@@ -1,7 +1,6 @@
 package destination.telegram;
 
-import common.Player;
-import message.DummyMessage;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -13,32 +12,24 @@ public class TelegramDestinationTest {
     private TelegramDestination underTest;
     private final TestingTelegramClient telegramClient = new TestingTelegramClient();
 
+    @BeforeEach
+    public void setup() {
+        underTest = new TelegramDestination(null, telegramClient);
+    }
+
     @Test
-    public void shouldCorrectlySendMessageForOneDestination() {
-        DummyMessage message = new DummyMessage("message");
-        underTest = new TelegramDestination(List.of(message), telegramClient);
-        List<Player> players = List.of(
-                new Player("player1", "club1"),
-                new Player("player2", "club2")
-        );
-        underTest.send(players, null);
-        assertEquals(message.createMessage(players), telegramClient.getMessages().get(0));
+    public void shouldCorrectlySendOneMessage() {
+        String message = "message";
+        underTest.send(null, List.of(message));
+        assertEquals(message, telegramClient.getMessages().get(0));
     }
 
     @Test
     public void shouldCorrectlySendMessageForTwoDestinations() {
-        DummyMessage message1 = new DummyMessage("message1");
-        DummyMessage message2 = new DummyMessage("message2");
-        underTest = new TelegramDestination(List.of(message1, message2), telegramClient);
-        List<Player> players = List.of(
-                new Player("player1", "club1"),
-                new Player("player2", "club2")
-        );
-        underTest.send(players, null);
-        assertEquals(
-                List.of(message1.createMessage(players), message2.createMessage(players)),
-                telegramClient.getMessages()
-        );
+        String message1 = "message1";
+        String message2 = "message2";
+        underTest.send(null, List.of(message1, message2));
+        assertEquals(List.of(message1, message2), telegramClient.getMessages());
     }
 
     private static class TestingTelegramClient implements TelegramClient {
