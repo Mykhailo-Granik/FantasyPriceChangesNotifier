@@ -1,15 +1,15 @@
 package destination.telegram;
 
+import common.TestingApplicationProperties;
 import common.TestingHttpClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import properties.ApplicationProperties;
 
 import java.net.URLEncoder;
 import java.util.Map;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TelegramClientImplTest {
 
@@ -23,7 +23,17 @@ public class TelegramClientImplTest {
 
     @BeforeEach
     void setUp() {
-        underTest = new TelegramClientImpl(new TestingApplicationProperties(), httpClient);
+        underTest = new TelegramClientImpl(
+                new TestingApplicationProperties(properties()),
+                httpClient
+        );
+    }
+
+    private Map<String, String> properties() {
+        return Map.of(
+                TELEGRAM_TOKEN_KEY, TELEGRAM_TOKEN_VALUE,
+                TELEGRAM_CHAT_ID_KEY, TELEGRAM_CHAT_ID_VALUE
+        );
     }
 
     @Test
@@ -37,19 +47,6 @@ public class TelegramClientImplTest {
                 ),
                 httpClient.getLastSentRequest().uri().toString()
         );
-    }
-
-    public static class TestingApplicationProperties implements ApplicationProperties {
-
-        private final Map<String, String> properties =
-                Map.of(
-                        TELEGRAM_TOKEN_KEY, TELEGRAM_TOKEN_VALUE,
-                        TELEGRAM_CHAT_ID_KEY, TELEGRAM_CHAT_ID_VALUE
-                );
-        @Override
-        public String getString(String key) {
-            return properties.get(key);
-        }
     }
 
 }

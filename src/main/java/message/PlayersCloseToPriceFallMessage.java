@@ -3,12 +3,14 @@ package message;
 import common.Player;
 import filter.PlayerFilter;
 import filter.PlayersCloseToPriceFallFilter;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
+@Getter
 public class PlayersCloseToPriceFallMessage extends AbstractMessage {
 
     private final double threshold;
@@ -27,4 +29,5 @@ public class PlayersCloseToPriceFallMessage extends AbstractMessage {
                 .map(Player::toString)
                 .collect(Collectors.joining("\n"));
     }
+
 }

@@ -3,17 +3,17 @@ package message;
 import common.Player;
 import filter.PlayerFilter;
 import filter.PlayersCloseToPriceRiseFilter;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
+@RequiredArgsConstructor
 public class PlayersCloseToPriceRiseMessage extends AbstractMessage {
 
     private final double threshold;
-
-    public PlayersCloseToPriceRiseMessage(double threshold) {
-        this.threshold = threshold;
-    }
 
     @Override
     protected PlayerFilter playerFilter() {
