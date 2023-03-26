@@ -3,7 +3,6 @@ package destination.telegram;
 import destination.Destination;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import message.Message;
 
 import java.util.List;
 
@@ -11,7 +10,6 @@ import java.util.List;
 @Getter
 public class TelegramDestination implements Destination {
 
-    private final List<Message> messages;
     private final TelegramClient telegramClient;
 
     @Override

@@ -2,8 +2,6 @@ package destination;
 
 import common.TestingApplicationProperties;
 import destination.telegram.TelegramDestination;
-import message.PlayersCloseToPriceFallMessage;
-import message.PlayersCloseToPriceRiseMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import properties.ApplicationProperties;
@@ -13,7 +11,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static destination.DestinationFactory.PLAYERS_CLOSE_TO_PRICE_CHANGE_THRESHOLD_KEY;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DestinationFactoryTest {
 
@@ -38,31 +37,6 @@ public class DestinationFactoryTest {
                         .anyMatch(destination -> destination instanceof TelegramDestination)
         );
     }
-
-    @Test
-    public void playersCloseToPriceFallMessageInTelegramDestinationShouldContainCorrectThreshold() {
-        List<PlayersCloseToPriceFallMessage> playersCloseToPriceFallMessages = messages(PlayersCloseToPriceFallMessage.class);
-        assertEquals(1, playersCloseToPriceFallMessages.size());
-        assertEquals(-Double.parseDouble(PLAYERS_CLOSE_TO_PRICE_CHANGE_THRESHOLD_VALUE), playersCloseToPriceFallMessages.get(0).getThreshold());
-    }
-
-    private <T> List<T> messages(Class<T> clazz) {
-        return underTest.create().stream()
-                .filter(TelegramDestination.class::isInstance)
-                .map(TelegramDestination.class::cast)
-                .flatMap(destination -> destination.getMessages().stream())
-                .filter(clazz::isInstance)
-                .map(clazz::cast)
-                .collect(Collectors.toList());
-    }
-
-    @Test
-    public void playersCloseToPriceRiseMessageInTelegramDestinationShouldContainCorrectThreshold() {
-        List<PlayersCloseToPriceRiseMessage> playersCloseToPriceRiseMessages = messages(PlayersCloseToPriceRiseMessage.class);
-        assertEquals(1, playersCloseToPriceRiseMessages.size());
-        assertEquals(Double.parseDouble(PLAYERS_CLOSE_TO_PRICE_CHANGE_THRESHOLD_VALUE), playersCloseToPriceRiseMessages.get(0).getThreshold());
-    }
-
     @Test
     public void shouldCorrectlyCreateTelegramClient() {
         List<TelegramDestination> telegramDestinations = underTest.create().stream()
