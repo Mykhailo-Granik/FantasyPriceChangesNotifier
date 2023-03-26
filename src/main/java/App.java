@@ -12,6 +12,7 @@ public class App {
         ApplicationProperties applicationProperties = new ApplicationPropertiesImpl();
         new Sender(
                 new RetrieverFactory(applicationProperties).create(),
+                null,
                 new DestinationFactory(applicationProperties).create()
         ).send();
     }
