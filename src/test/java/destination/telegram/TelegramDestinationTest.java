@@ -20,7 +20,7 @@ public class TelegramDestinationTest {
     @Test
     public void shouldCorrectlySendOneMessage() {
         String message = "message";
-        underTest.send(null, List.of(message));
+        underTest.send(List.of(message));
         assertEquals(message, telegramClient.getMessages().get(0));
     }
 
@@ -28,7 +28,7 @@ public class TelegramDestinationTest {
     public void shouldCorrectlySendMessageForTwoDestinations() {
         String message1 = "message1";
         String message2 = "message2";
-        underTest.send(null, List.of(message1, message2));
+        underTest.send(List.of(message1, message2));
         assertEquals(List.of(message1, message2), telegramClient.getMessages());
     }
 

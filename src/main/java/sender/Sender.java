@@ -19,7 +19,7 @@ public class Sender {
     public void send() {
         List<Player> players = retriever.retrieve();
         List<String> messagesAsString = messagesAsString(players);
-        destinations.forEach(d -> d.send(players, messagesAsString));
+        destinations.forEach(d -> d.send(messagesAsString));
     }
 
     private List<String> messagesAsString(List<Player> players) {
