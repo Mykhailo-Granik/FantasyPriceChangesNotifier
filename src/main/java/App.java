@@ -1,4 +1,5 @@
 import destination.DestinationFactory;
+import message.MessagesFactory;
 import properties.ApplicationProperties;
 import properties.ApplicationPropertiesImpl;
 import retriever.RetrieverFactory;
@@ -12,7 +13,7 @@ public class App {
         ApplicationProperties applicationProperties = new ApplicationPropertiesImpl();
         new Sender(
                 new RetrieverFactory(applicationProperties).create(),
-                null,
+                new MessagesFactory(applicationProperties).create(),
                 new DestinationFactory(applicationProperties).create()
         ).send();
     }

@@ -12,7 +12,7 @@ public class MessagesFactory {
 
     public List<Message> create() {
         return List.of(
-                new PlayersCloseToPriceFallMessage(getPlayersCloseToPriceChangeThreshold()),
+                new PlayersCloseToPriceFallMessage(-getPlayersCloseToPriceChangeThreshold()),
                 new PlayersCloseToPriceRiseMessage(getPlayersCloseToPriceChangeThreshold())
         );
     }

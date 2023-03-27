@@ -24,10 +24,10 @@ public class MessagesFactoryTest {
     }
 
     @Test
-    public void createdMessagesShouldContainPlayersCloseToPriceRiceChallenge() {
+    public void createdMessagesShouldContainPlayersCloseToPriceFallThreshold() {
         PlayersCloseToPriceFallMessage message = getFirstMessageOfType(PlayersCloseToPriceFallMessage.class);
         assertNotNull(message);
-        assertEquals(Double.valueOf(THRESHOLD), message.getThreshold());
+        assertEquals(-Double.parseDouble(THRESHOLD), message.getThreshold());
     }
 
     private <T> T getFirstMessageOfType(Class<T> type) {
@@ -39,10 +39,10 @@ public class MessagesFactoryTest {
     }
 
     @Test
-    public void createdMessagesShouldContainPlayersCloseToPriceRiceChallenge2() {
+    public void createdMessagesShouldContainPlayersCloseToPriceRiceThreshold() {
         PlayersCloseToPriceRiseMessage message = getFirstMessageOfType(PlayersCloseToPriceRiseMessage.class);
         assertNotNull(message);
-        assertEquals(Double.valueOf(THRESHOLD), message.getThreshold());
+        assertEquals(Double.parseDouble(THRESHOLD), message.getThreshold());
     }
 
 }
