@@ -5,29 +5,33 @@ import destination.telegram.TelegramDestination;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import properties.ApplicationProperties;
+import splitter.TelegramMessageSplitter;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import static destination.DestinationFactory.PLAYERS_CLOSE_TO_PRICE_CHANGE_THRESHOLD_KEY;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static destination.DestinationFactory.TELEGRAM_MAX_MESSAGE_LENGTH;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DestinationFactoryTest {
 
     public static final String PLAYERS_CLOSE_TO_PRICE_CHANGE_THRESHOLD_VALUE = "99.0";
+    public static final String MAX_MESSAGE_LENGTH = "4000";
     private DestinationFactory underTest;
-    private ApplicationProperties applicationProperties;
 
     @BeforeEach
     public void setUp() {
-        applicationProperties = new TestingApplicationProperties(properties());
+        ApplicationProperties applicationProperties = new TestingApplicationProperties(properties());
         underTest = new DestinationFactory(applicationProperties);
     }
 
     private Map<String, String> properties() {
-        return Map.of(PLAYERS_CLOSE_TO_PRICE_CHANGE_THRESHOLD_KEY, PLAYERS_CLOSE_TO_PRICE_CHANGE_THRESHOLD_VALUE);
+        return Map.of(
+                PLAYERS_CLOSE_TO_PRICE_CHANGE_THRESHOLD_KEY, PLAYERS_CLOSE_TO_PRICE_CHANGE_THRESHOLD_VALUE,
+                TELEGRAM_MAX_MESSAGE_LENGTH, MAX_MESSAGE_LENGTH
+        );
     }
 
     @Test
@@ -53,7 +57,10 @@ public class DestinationFactoryTest {
                 .filter(TelegramDestination.class::isInstance)
                 .map(TelegramDestination.class::cast)
                 .collect(Collectors.toList());
-        assertNotNull(telegramDestinations.get(0).getMessageSplitter());
+        assertEquals(
+                Integer.parseInt(MAX_MESSAGE_LENGTH),
+                ((TelegramMessageSplitter) telegramDestinations.get(0).getMessageSplitter()).getMaxMessageLength()
+        );
     }
 
 }

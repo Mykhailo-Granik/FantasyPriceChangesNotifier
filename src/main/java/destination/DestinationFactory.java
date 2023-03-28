@@ -12,15 +12,20 @@ import java.util.List;
 public class DestinationFactory {
 
     public static final String PLAYERS_CLOSE_TO_PRICE_CHANGE_THRESHOLD_KEY = "playersCloseToPriceChangeThreshold";
+    public static final String TELEGRAM_MAX_MESSAGE_LENGTH = "telegram.maxMessageLength";
     private final ApplicationProperties applicationProperties;
 
     public List<Destination> create() {
         return List.of(
                 new TelegramDestination(
                         new TelegramClientImpl(applicationProperties),
-                        new TelegramMessageSplitter(0)
+                        new TelegramMessageSplitter(maxMessageLength())
                 )
         );
+    }
+
+    private int maxMessageLength() {
+        return Integer.parseInt(applicationProperties.getString(TELEGRAM_MAX_MESSAGE_LENGTH));
     }
 
 }

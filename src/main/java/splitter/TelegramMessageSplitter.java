@@ -1,8 +1,11 @@
 package splitter;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class TelegramMessageSplitter implements MessageSplitter {
 
     private final int maxMessageLength;
