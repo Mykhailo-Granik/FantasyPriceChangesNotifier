@@ -37,6 +37,7 @@ public class DestinationFactoryTest {
                         .anyMatch(destination -> destination instanceof TelegramDestination)
         );
     }
+
     @Test
     public void shouldCorrectlyCreateTelegramClient() {
         List<TelegramDestination> telegramDestinations = underTest.create().stream()
@@ -44,6 +45,15 @@ public class DestinationFactoryTest {
                 .map(TelegramDestination.class::cast)
                 .collect(Collectors.toList());
         assertNotNull(telegramDestinations.get(0).getTelegramClient());
+    }
+
+    @Test
+    public void shouldCorrectlyCreateTelegramMessageSplitter() {
+        List<TelegramDestination> telegramDestinations = underTest.create().stream()
+                .filter(TelegramDestination.class::isInstance)
+                .map(TelegramDestination.class::cast)
+                .collect(Collectors.toList());
+        assertNotNull(telegramDestinations.get(0).getMessageSplitter());
     }
 
 }

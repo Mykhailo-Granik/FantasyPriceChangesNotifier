@@ -4,6 +4,7 @@ import destination.telegram.TelegramClientImpl;
 import destination.telegram.TelegramDestination;
 import lombok.RequiredArgsConstructor;
 import properties.ApplicationProperties;
+import splitter.TelegramMessageSplitter;
 
 import java.util.List;
 
@@ -16,7 +17,8 @@ public class DestinationFactory {
     public List<Destination> create() {
         return List.of(
                 new TelegramDestination(
-                        new TelegramClientImpl(applicationProperties)
+                        new TelegramClientImpl(applicationProperties),
+                        new TelegramMessageSplitter(0)
                 )
         );
     }

@@ -14,7 +14,7 @@ public class TelegramDestinationTest {
 
     @BeforeEach
     public void setup() {
-        underTest = new TelegramDestination(telegramClient);
+        underTest = new TelegramDestination(telegramClient, null);
     }
 
     @Test
