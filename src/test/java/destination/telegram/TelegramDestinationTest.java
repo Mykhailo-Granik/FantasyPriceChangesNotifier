@@ -50,6 +50,14 @@ public class TelegramDestinationTest {
         assertEquals(List.of("mess", "age"), telegramClient.getMessages());
     }
 
+    @Test
+    public void whenMessageSplitterReturnsThreePartsShouldSendThreeMessages() {
+        String message = "message";
+        underTest = new TelegramDestination(telegramClient, new EqualPartsSplitter(3));
+        underTest.send(List.of(message));
+        assertEquals(List.of("mes", "sag", "e"), telegramClient.getMessages());
+    }
+
     private static class TestingDummyMessageSplitter implements MessageSplitter {
         @Override
         public List<String> split(String message) {
