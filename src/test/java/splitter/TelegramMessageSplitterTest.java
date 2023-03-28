@@ -57,4 +57,11 @@ public class TelegramMessageSplitterTest {
         assertEquals(List.of("Hello\n", "World!"), result);
     }
 
+    @Test
+    public void shouldCreateTwoMessagesIfTheFirstLineLengthIsExactlyTheLimitAndTheSumOfSecondAndThirdLineIsExactlyTheLimit() {
+        TelegramMessageSplitter underTest = new TelegramMessageSplitter(6);
+        List<String> result = underTest.split("Hello\nHi\ncat");
+        assertEquals(List.of("Hello\n", "Hi\ncat"), result);
+    }
+
 }
