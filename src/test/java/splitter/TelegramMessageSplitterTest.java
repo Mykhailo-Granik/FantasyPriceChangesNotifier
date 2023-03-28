@@ -43,4 +43,18 @@ public class TelegramMessageSplitterTest {
         assertEquals(List.of("Hi\n", "World"), result);
     }
 
+    @Test
+    public void shouldPerformSplitIfTheFirstLineLengthIsExactlyTheLimit() {
+        TelegramMessageSplitter underTest = new TelegramMessageSplitter(6);
+        List<String> result = underTest.split("Hello\nWorld");
+        assertEquals(List.of("Hello\n", "World"), result);
+    }
+
+    @Test
+    public void shouldPerformSplitIfTheLastLineLengthIsExactlyTheLimit() {
+        TelegramMessageSplitter underTest = new TelegramMessageSplitter(6);
+        List<String> result = underTest.split("Hello\nWorld!");
+        assertEquals(List.of("Hello\n", "World!"), result);
+    }
+
 }
