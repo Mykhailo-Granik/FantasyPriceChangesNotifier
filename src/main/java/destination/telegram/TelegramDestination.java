@@ -16,6 +16,10 @@ public class TelegramDestination implements Destination {
 
     @Override
     public void send(List<String> messages) {
-        messages.forEach(telegramClient::sendMessage);
+        messages.forEach(this::sendInParts);
+    }
+
+    private void sendInParts(String message) {
+        messageSplitter.split(message).forEach(telegramClient::sendMessage);
     }
 }
