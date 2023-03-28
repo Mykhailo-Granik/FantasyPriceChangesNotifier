@@ -44,22 +44,21 @@ public class DestinationFactoryTest {
 
     @Test
     public void shouldCorrectlyCreateTelegramClient() {
-        List<TelegramDestination> telegramDestinations = underTest.create().stream()
+        assertNotNull(telegramDestinations().get(0).getTelegramClient());
+    }
+
+    private List<TelegramDestination> telegramDestinations() {
+        return underTest.create().stream()
                 .filter(TelegramDestination.class::isInstance)
                 .map(TelegramDestination.class::cast)
                 .collect(Collectors.toList());
-        assertNotNull(telegramDestinations.get(0).getTelegramClient());
     }
 
     @Test
     public void shouldCorrectlyCreateTelegramMessageSplitter() {
-        List<TelegramDestination> telegramDestinations = underTest.create().stream()
-                .filter(TelegramDestination.class::isInstance)
-                .map(TelegramDestination.class::cast)
-                .collect(Collectors.toList());
         assertEquals(
                 Integer.parseInt(MAX_MESSAGE_LENGTH),
-                ((TelegramMessageSplitter) telegramDestinations.get(0).getMessageSplitter()).getMaxMessageLength()
+                ((TelegramMessageSplitter) telegramDestinations().get(0).getMessageSplitter()).getMaxMessageLength()
         );
     }
 
