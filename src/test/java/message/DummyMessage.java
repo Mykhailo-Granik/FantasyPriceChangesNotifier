@@ -5,6 +5,7 @@ import filter.AllMatchFilter;
 import filter.PlayerFilter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Comparator;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -15,6 +16,11 @@ public class DummyMessage extends AbstractMessage {
     @Override
     protected PlayerFilter playerFilter() {
         return new AllMatchFilter();
+    }
+
+    @Override
+    protected Comparator<Player> playersOrderingComparator() {
+        return null;
     }
 
     @Override

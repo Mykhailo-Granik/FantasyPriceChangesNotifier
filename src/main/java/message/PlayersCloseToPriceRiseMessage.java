@@ -5,7 +5,9 @@ import filter.PlayerFilter;
 import filter.PlayersCloseToPriceRiseFilter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import sort.PlayersComparatorByTargetDescending;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +20,11 @@ public class PlayersCloseToPriceRiseMessage extends AbstractMessage {
     @Override
     protected PlayerFilter playerFilter() {
         return new PlayersCloseToPriceRiseFilter(threshold);
+    }
+
+    @Override
+    protected Comparator<Player> playersOrderingComparator() {
+        return new PlayersComparatorByTargetDescending();
     }
 
     @Override
