@@ -18,6 +18,10 @@ public class Player {
 
     }
 
+    public Player(double target) {
+        this.target = new DoubleWithOnePlace(target);
+    }
+
     public Player(String name, String club) {
         this.name = name;
         this.club = club;
