@@ -25,7 +25,7 @@ public class PlayersCloseToPriceFallMessageTest {
         Player player3 = new Player("Player 3", "club3", Position.GK, 4.0, -101.0);
         String message = underTest.createMessage(List.of(player1, player2, player3));
         assertEquals(
-                "Players close to price fall  ⬇️⬇️⬇️️\n" + player1 + "\n" + player3,
+                "Players close to price fall  ⬇️⬇️⬇️️\n" + player3 + "\n" + player1,
                 message
         );
     }

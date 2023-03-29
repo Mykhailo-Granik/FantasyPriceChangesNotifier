@@ -5,6 +5,7 @@ import filter.PlayerFilter;
 import filter.PlayersCloseToPriceFallFilter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import sort.PlayersComparatorByTargetAscending;
 
 import java.util.Comparator;
 import java.util.List;
@@ -23,7 +24,7 @@ public class PlayersCloseToPriceFallMessage extends AbstractMessage {
 
     @Override
     protected Comparator<Player> playersOrderingComparator() {
-        return null;
+        return new PlayersComparatorByTargetAscending();
     }
 
     @Override
