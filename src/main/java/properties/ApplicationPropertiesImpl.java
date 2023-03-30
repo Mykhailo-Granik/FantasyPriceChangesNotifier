@@ -10,7 +10,7 @@ public class ApplicationPropertiesImpl implements ApplicationProperties {
 
     public ApplicationPropertiesImpl() throws IOException {
         props = new Properties();
-        FileInputStream propertiesInputStream = new FileInputStream("src/main/resources/application.properties");
+        FileInputStream propertiesInputStream = new FileInputStream("application.properties");
         props.load(propertiesInputStream);
         propertiesInputStream.close();
     }
