@@ -18,7 +18,14 @@ public class RetrieverFactory {
     private final ApplicationProperties applicationProperties;
 
     public Retriever create() {
-        return fplStatisticsRetriever();
+        String retrieverType = applicationProperties.getString("retriever");
+        if (retrieverType.equals("fantasyfootballhub")) {
+            return fantasyFootballHubRetriever();
+        }
+        if (retrieverType.equals("fplstatistics")) {
+            return fplStatisticsRetriever();
+        }
+        throw new IllegalArgumentException("Retriever not supported " + retrieverType);
     }
 
     private FPLStatisticsRetriever fplStatisticsRetriever() {
