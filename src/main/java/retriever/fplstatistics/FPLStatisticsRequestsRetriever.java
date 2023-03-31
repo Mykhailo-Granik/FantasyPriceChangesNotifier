@@ -1,6 +1,7 @@
 package retriever.fplstatistics;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.DevTools;
@@ -12,12 +13,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Log4j2
 public class FPLStatisticsRequestsRetriever {
 
     private final ApplicationProperties applicationProperties;
     private final List<String> requests = new ArrayList<>();
 
     public List<String> dataURL() {
+        log.info("Retrieving FPL Statistics data URL using Selenium");
         requests.clear();
         setChromeDriverPath();
         ChromeOptions chromeOptions = new ChromeOptions();

@@ -1,5 +1,6 @@
 package destination.telegram;
 
+import lombok.extern.log4j.Log4j2;
 import properties.ApplicationProperties;
 
 import java.net.URI;
@@ -8,8 +9,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-import static java.nio.charset.StandardCharsets.*;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
+@Log4j2
 public class TelegramClientImpl implements TelegramClient {
 
     private final ApplicationProperties applicationProperties;
@@ -27,13 +29,16 @@ public class TelegramClientImpl implements TelegramClient {
 
     @Override
     public void sendMessage(String message) {
+        log.info("Sending message to Telegram: {}", message);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(buildUri(message)))
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .build();
         try {
-            client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            log.info("Telegram response: {}", response.body());
         } catch (Exception e) {
+            log.error("Error sending message to Telegram", e);
             throw new RuntimeException(e);
         }
 
