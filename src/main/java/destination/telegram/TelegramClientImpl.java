@@ -29,7 +29,7 @@ public class TelegramClientImpl implements TelegramClient {
 
     @Override
     public void sendMessage(String message) {
-        log.info("Sending message to Telegram: {}", message);
+        log.info("Sending message to Telegram: {}...", message.substring(0, Math.min(message.length(), 100)));
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(buildUri(message)))
                 .POST(HttpRequest.BodyPublishers.noBody())
